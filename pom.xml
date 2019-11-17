@@ -62,8 +62,8 @@
 		<webjars-bootstrap.version>2.3.0</webjars-bootstrap.version>
 		<webjars-jquery-ui.version>1.10.3</webjars-jquery-ui.version>
 		<webjars-jquery.version>2.0.3-1</webjars-jquery.version>
-		<dandelion.version>0.10.1</dandelion.version>
 
+		<!-- MySQL version -->
 		<mysql.version>5.1.22</mysql.version>
 
 	</properties>
@@ -301,14 +301,19 @@
 
 		<!-- Dandelion -->
 		<dependency>
+		    <groupId>com.github.dandelion</groupId>
+		    <artifactId>dandelion-core</artifactId>
+		    <version>1.1.1</version>
+		</dependency>		
+		<dependency>
 			<groupId>com.github.dandelion</groupId>
 			<artifactId>datatables-jsp</artifactId>
-			<version>${dandelion.version}</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.dandelion</groupId>
 			<artifactId>datatables-export-itext</artifactId>
-			<version>${dandelion.version}</version>
+			<version>1.1.0</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
@@ -320,9 +325,9 @@
 				pulls both 3.2.x and 3.1.x versions of spring-core, spring-beans and spring-context
 			-->
 			<dependency>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-core</artifactId>
-					<version>${spring-framework.version}</version>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring-framework.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
