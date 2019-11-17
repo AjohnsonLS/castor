@@ -359,6 +359,7 @@
 
 	<!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
 	<build>
+	    <finalName>ROOT</finalName>
 		<defaultGoal>install</defaultGoal>
 		<testResources>
 		  <testResource>
