@@ -15,7 +15,12 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Spring -->
-		<spring-framework.version>4.1.1.RELEASE</spring-framework.version>
+		<spring-framework.version>4.3.25.RELEASE</spring-framework.version>
+
+<version>[4.3.17,)</version>
+
+
+
 		<spring-data-jpa.version>1.7.0.RELEASE</spring-data-jpa.version>
 
 
