@@ -299,6 +299,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
+
 		<!-- Dandelion -->
 		<dependency>
 		    <groupId>com.github.dandelion</groupId>
@@ -315,18 +316,6 @@
 			<artifactId>datatables-export-itext</artifactId>
 			<version>1.1.0</version>
 		</dependency>
-
-		<!-- Prometheus -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>		
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
