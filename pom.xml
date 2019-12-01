@@ -356,6 +356,18 @@
 				<version>${spring-framework.version}</version>
 			</dependency>
 		</dependencies>
+
+		<!-- Prometheus -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
 	</dependencyManagement>
 
 	<!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
