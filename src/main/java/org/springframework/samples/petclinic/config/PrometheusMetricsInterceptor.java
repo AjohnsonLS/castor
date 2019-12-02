@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.config;
 
+
 import io.prometheus.client.Counter;
 import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
@@ -12,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
 
-    private static final Histogram requestLatency = Histogram.build().name"service_requests_latency_seconds").help("Request latency in seconds.").labelNames("systemId", "appId", "type", "name", "method").register();
-    
+    private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("systemId", "appId", "type", "name", "method").register();
     private ThreadLocal<Histogram.Timer> timerThreadLocal;
 
     @Override
