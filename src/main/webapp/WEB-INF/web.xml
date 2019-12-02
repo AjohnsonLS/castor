@@ -157,7 +157,7 @@ see here: http://static.springsource.org/spring/docs/current/spring-framework-re
     </servlet>
     <servlet-mapping>
         <servlet-name>metrics</servlet-name>
-        <url-pattern>/metrics</url-pattern>
+        <url-pattern>/actuator/prometheus</url-pattern>
     </servlet-mapping>      
 
 </web-app>
