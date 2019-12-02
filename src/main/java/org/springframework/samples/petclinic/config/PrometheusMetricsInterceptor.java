@@ -27,7 +27,7 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
             final ModelAndView modelAndView) throws Exception {
         final String name = this.getName(request, handler).toLowerCase();
         final String method = request.getMethod().toUpperCase();
-        timerThreadLocal = new ThreadLocal();
+        timerThreadLocal = new ThreadLocal<>();
         timerThreadLocal.set(requestLatency.labels(name, method).startTimer());
         super.postHandle(request, response, handler, modelAndView);
     }
