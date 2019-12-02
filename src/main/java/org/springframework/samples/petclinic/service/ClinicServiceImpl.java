@@ -49,6 +49,7 @@ public class ClinicServiceImpl implements ClinicService {
     private OwnerRepository ownerRepository;
     private VisitRepository visitRepository;
 
+    /** Prometheus */
     @PostConstruct
     public void init() {
         DefaultExports.initialize();
