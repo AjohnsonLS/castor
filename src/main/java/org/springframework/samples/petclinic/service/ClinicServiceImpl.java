@@ -33,7 +33,7 @@ import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import io.prometheus.client.hotspot.DefaultExports;
+
 
 /**
  * Mostly used as a facade for all Petclinic controllers
