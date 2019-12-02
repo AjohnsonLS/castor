@@ -50,10 +50,10 @@ public class ClinicServiceImpl implements ClinicService {
     private VisitRepository visitRepository;
 
     /** Prometheus */
-    @PostConstruct
-    public void init() {
-        DefaultExports.initialize();
-    }
+    // @PostConstruct
+    // public void init() {
+    //     DefaultExports.initialize();
+    // }
 
     @Autowired
     public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
