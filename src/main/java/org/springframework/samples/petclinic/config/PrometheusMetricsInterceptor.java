@@ -14,36 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
 
     private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("systemId", "appId", "type", "name", "method").register();
+
     private ThreadLocal<Histogram.Timer> timerThreadLocal;
 
     @Override
-    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
-            throws Exception {
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler) throws Exception {
         return super.preHandle(request, response, handler);
     }
 
     @Override
-    public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,
-            final ModelAndView modelAndView) throws Exception {
+    public void postHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler,final ModelAndView modelAndView) throws Exception {
+
         final String name = this.getName(request, handler).toLowerCase();
         final String method = request.getMethod().toUpperCase();
+
         timerThreadLocal = new ThreadLocal<>();
+
         timerThreadLocal.set(requestLatency.labels(name, method).startTimer());
+
         super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
-    public void afterCompletion(final HttpServletRequest request, final HttpServletResponse response,
-            final Object handler, final Exception ex) throws Exception {
+    public void afterCompletion(final HttpServletRequest request, final HttpServletResponse response, final Object handler, final Exception ex) throws Exception {
+
         super.afterCompletion(request, response, handler, ex);
+
         if (timerThreadLocal.get() != null) {
             timerThreadLocal.get().observeDuration();
         }
+
     }
 
     @Override
-    public void afterConcurrentHandlingStarted(final HttpServletRequest request, final HttpServletResponse response,
-            final Object handler) throws Exception {
+    public void afterConcurrentHandlingStarted(final HttpServletRequest request, final HttpServletResponse response,final Object handler) throws Exception {
+        
         super.afterConcurrentHandlingStarted(request, response, handler);
     }
 
