@@ -17,6 +17,8 @@ package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
@@ -31,6 +33,7 @@ import org.springframework.samples.petclinic.repository.VetRepository;
 import org.springframework.samples.petclinic.repository.VisitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import io.prometheus.client.hotspot.DefaultExports;
 
 /**
  * Mostly used as a facade for all Petclinic controllers
@@ -45,6 +48,11 @@ public class ClinicServiceImpl implements ClinicService {
     private VetRepository vetRepository;
     private OwnerRepository ownerRepository;
     private VisitRepository visitRepository;
+
+    @PostConstruct
+    public void init() {
+        DefaultExports.initialize();
+    }
 
     @Autowired
     public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository, VisitRepository visitRepository) {
