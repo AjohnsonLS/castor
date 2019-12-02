@@ -1,9 +1,5 @@
 package org.springframework.samples.petclinic.config;
 
-
-import io.prometheus.client.Counter;
-import io.prometheus.client.Gauge;
-import io.prometheus.client.Histogram;
 import io.prometheus.client.Summary;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,8 +14,6 @@ public class PrometheusQuantileInterceptor extends HandlerInterceptorAdapter {
     private static final long updateDurationInSec = 60;
 
     private static Logger logger = LoggerFactory.getLogger(PrometheusQuantileInterceptor.class);
-
-    // private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("name", "method").register();
 
     private static final Summary requestLatency = Summary.build().quantile(0.5,0).quantile(0.5,0).quantile(0.9,0).quantile(0.95,0).quantile(0.99,0).quantile(0.999,0).name("http_server_requests_seconds").help("http_server_requests_seconds histogram").labelNames("name", "method").maxAgeSeconds(updateDurationInSec).register();
 

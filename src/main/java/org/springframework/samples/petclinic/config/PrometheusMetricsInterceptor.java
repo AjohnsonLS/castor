@@ -1,10 +1,6 @@
 package org.springframework.samples.petclinic.config;
 
-
-import io.prometheus.client.Counter;
-import io.prometheus.client.Gauge;
 import io.prometheus.client.Histogram;
-import io.prometheus.client.Summary;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -18,8 +14,6 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
     private static Logger logger = LoggerFactory.getLogger(PrometheusMetricsInterceptor.class);
 
     private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("name", "method").register();
-
-    // private static final Summary requestLatency = Summary.build().quantile(0.5,0).quantile(0.5,0).quantile(0.9,0).quantile(0.95,0).quantile(0.599,0).quantile(0.999,0).name("http_server_requests_seconds").help("http_server_requests_seconds histogram").labelNames("name", "method").register();
 
     private ThreadLocal<Histogram.Timer> timerThreadLocal;
 
@@ -71,7 +65,7 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
                 name = request.getRequestURI();
             }
         } catch (final Exception ex) {
-            logger.error("getName", ex);
+           logger.error("getName", ex);
         } finally {
             return name;
         }
