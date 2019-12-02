@@ -63,4 +63,10 @@
         <!-- needed otherwise exceptions won't be logged anywhere -->
     </bean>
 
+    <!--Prometheus -->
+    <mvc:interceptors>
+        <bean class="org.springframework.samples.petclinic.config.PrometheusMetricsInterceptor"/>
+    </mvc:interceptors>
+    <bean id="prometheusConfig" class="org.springframework.samples.petclinic.config.PrometheusConfig" init-method="initialize" />
+
 </beans>

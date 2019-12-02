@@ -41,7 +41,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </listener>
 
     <!-- Prometheus Filter -->
-    <filter>
+    <!-- <filter>
         <filter-name>prometheusFilter</filter-name>
         <filter-class>io.prometheus.client.filter.MetricsFilter</filter-class>
         <init-param>
@@ -64,7 +64,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <filter-mapping>
         <filter-name>prometheusFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping> -->
 
     <!-- Servlet that dispatches request to registered handlers (Controller implementations) -->
     <servlet>
