@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
 
-    // private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("name", "method").register();
+    private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("name", "method").register();
 
-    private static final Summary requestLatency = Summary.build().quantile(0.5,0).quantile(0.5,0).quantile(0.9,0).quantile(0.95,0).quantile(0.599,0).quantile(0.999,0).name("http_server_requests_seconds").help("http_server_requests_seconds histogram").labelNames("name", "method").register();
+    // private static final Summary requestLatency = Summary.build().quantile(0.5,0).quantile(0.5,0).quantile(0.9,0).quantile(0.95,0).quantile(0.599,0).quantile(0.999,0).name("http_server_requests_seconds").help("http_server_requests_seconds histogram").labelNames("name", "method").register();
 
     private ThreadLocal<Histogram.Timer> timerThreadLocal;
 
