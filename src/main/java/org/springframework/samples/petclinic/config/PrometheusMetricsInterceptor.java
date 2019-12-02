@@ -10,8 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
+
+    private static Logger logger = LoggerFactory.getLogger(PrometheusMetricsInterceptor.class);
 
     private static final Histogram requestLatency = Histogram.build().name("service_requests_latency_seconds").help("Request latency in seconds.").labelNames("name", "method").register();
 
@@ -67,7 +71,7 @@ public class PrometheusMetricsInterceptor extends HandlerInterceptorAdapter {
                 name = request.getRequestURI();
             }
         } catch (final Exception ex) {
-            // log error
+            logger.error("getName", ex);
         } finally {
             return name;
         }
