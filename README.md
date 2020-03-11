@@ -35,6 +35,13 @@ This is the Spring PetClinic Sample Application
 
 1. Login to OKD
 
+1. Clone Project
+
+	```
+	git clone git@github.com:advlab/castor.git
+	cd castor
+	```
+
 1. Deploy on OKD
 
     ```
