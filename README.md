@@ -7,6 +7,15 @@ This is the Spring PetClinic Sample Application
 * Latest Tomcat
 * Maven
 
+# Clone Project
+
+1. Clone Project as follows:
+
+	```
+	git clone git@github.com:advlab/erebus.git
+	cd erebus
+	```
+
 # Deploy Locally
 
 1. Clone Project
@@ -31,6 +40,16 @@ This is the Spring PetClinic Sample Application
     http://localhost:8080
     http://localhost:8080/actuator/prometheus
     ```
+
+# Login to OKD
+
+1. Login to OKD Console and get Token
+
+1. Login to OKD unsing the CLI
+
+	```
+	oc login https://OKD-URL:OKD-PORT --token=YOUR-TOKEN
+	```
 
 # Deploy on OKD
 
