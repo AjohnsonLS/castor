@@ -29,6 +29,7 @@ This is the Spring PetClinic Sample Application
 
     ```
     http://localhost:8080
+    http://localhost:8080/actuator/prometheus
     ```
 
 # Deploy on OKD

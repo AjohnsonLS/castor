@@ -1,0 +1,26 @@
+/* Parameters */        
+// def key1 = "${VALUE1}"
+// def key2 = "${VALUE2}"
+// def key3 = "${VALUE3}"
+
+/* Pipeline */
+pipeline {
+  agent any
+  options {
+    timeout(time: 20, unit: 'MINUTES')
+  }
+  stages {
+    stage("Stage 1") {
+      steps {
+        echo "Stage 1: Step 1..."
+        /* Step here */
+      }
+    }  
+    stage("Stage 2") {
+      steps {
+        echo "Stage 2: Step 1..."
+        /* Step here */
+      }
+    }
+  }
+}
