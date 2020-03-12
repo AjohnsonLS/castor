@@ -70,7 +70,7 @@ objects:
       monitor: 'true'
     name: castor
   spec:
-    replicas: 2
+    replicas: 4
     revisionHistoryLimit: 2
     selector:
       app: castor
