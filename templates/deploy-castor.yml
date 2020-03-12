@@ -71,7 +71,7 @@ objects:
     name: castor
   spec:
     replicas: 2
-    revisionHistoryLimit: 1
+    revisionHistoryLimit: 2
     selector:
       app: castor
       deploymentconfig: castor
