@@ -1,0 +1,129 @@
+###############################################################################
+#                                   Template                                  #
+###############################################################################
+apiVersion: v1
+kind: Template
+labels:
+  app: castor
+  template: deploy-castor
+message: Deploy Castor
+metadata:
+  name: deploy-castor
+  annotations:
+    description: Deploy Castor
+    openshift.io/display-name: Deploy Castor
+    openshift.io/long-description: Deploy Castor
+    openshift.io/provider-display-name: ADVLab
+    openshift.io/support-url: https://github.com/advlab/castor
+    tags: advlab
+objects:
+################################################################################
+#                                  Service                                     #
+################################################################################
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: castor
+      monitor: 'true'
+    name: castor
+  spec:
+    ports:
+      - name: 8080-tcp
+        port: 8080
+        protocol: TCP
+        targetPort: 8080
+    selector:
+      app: castor
+      deploymentconfig: castor
+      monitor: 'true'
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {} 
+################################################################################
+#                                   Route                                      #
+################################################################################
+- apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    labels:
+      app: castor
+      monitor: 'true'
+    name: castor
+  spec:
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: castor
+      weight: 100
+    wildcardPolicy: None
+################################################################################
+#                         Deployment Configuration                             #
+################################################################################
+- apiVersion: apps.openshift.io/v1
+  kind: DeploymentConfig
+  metadata:
+    labels:
+      app: castor
+      monitor: 'true'
+    name: castor
+  spec:
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      app: castor
+      deploymentconfig: castor
+      monitor: 'true'
+    strategy:
+      activeDeadlineSeconds: 21600
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: castor
+          deploymentconfig: castor
+          monitor: 'true'
+      spec:
+        containers:
+          - image: 'docker-registry.default.svc:5000/perseus/castor:latest'
+            imagePullPolicy: IfNotPresent
+            name: castor
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            dnsPolicy: ClusterFirst
+            restartPolicy: Always
+            schedulerName: default-scheduler
+            securityContext: {}
+            terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+      - type: ConfigChange
+      # - imageChangeParams:
+      #     automatic: true
+      #     containerNames:
+      #       - castor
+      #     from:
+      #       kind: ImageStreamTag
+      #       name: 'castor:latest'
+      #   type: ImageChange
+################################################################################
+#                            Template Parameters                               #
+################################################################################
+# parameters:
+# - name: POD_NAME
+#   description: Pod Name
+#   displayName: Pod Name
+#   required: true

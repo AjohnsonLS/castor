@@ -10,16 +10,17 @@ pipeline {
     timeout(time: 20, unit: 'MINUTES')
   }
   stages {
-    stage("Stage 1") {
+    stage("Build Image") {
       steps {
-        echo "Stage 1: Step 1..."
-        /* Step here */
+        echo "Build Image..."
+        sh 'oc process -f templates/build-erebus.yml | oc apply -f -'
+        sh 'oc start-build erebus --wait'
       }
     }  
-    stage("Stage 2") {
+    stage("Deploy Pod") {
       steps {
-        echo "Stage 2: Step 1..."
-        /* Step here */
+        echo "Deploy Pod"
+        sh 'oc process -f templates/deploy-erebus.yml | oc apply -f -'
       }
     }
   }
