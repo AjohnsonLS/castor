@@ -6,6 +6,7 @@ kind: Template
 labels:
   app: castor
   template: build-castor
+  application: Furballs
 message: Build Castor
 metadata:
   name: build-castor
@@ -25,6 +26,7 @@ objects:
   metadata:
     labels:
       app: castor
+      application: Furballs
       monitor: 'true'
     name: castor
   spec:
@@ -38,6 +40,7 @@ objects:
   metadata:
     labels:
       app: castor
+      application: Furballs
       monitor: 'true'
     name: castor
   spec:
