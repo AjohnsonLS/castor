@@ -347,7 +347,7 @@
 		<!-- Azure Insights -->
 		<dependency>
 			<groupId>com.microsoft.azure</groupId>
-			<artifactId>applicationinsights-web</artifactId>
+			<artifactId>applicationinsights-web-auto</artifactId>
 			<!-- or applicationinsights-web-auto for auto web filter registration -->
 			<!-- or applicationinsights-web for manual web filter registration -->
 			<!-- or applicationinsights-core for bare API -->
