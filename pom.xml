@@ -344,6 +344,16 @@
 		</dependency>
 		-->
 
+		<!-- Azure Insights -->
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>applicationinsights-web-auto</artifactId>
+			<!-- or applicationinsights-web-auto for auto web filter registration -->
+			<!-- or applicationinsights-web for manual web filter registration -->
+			<!-- or applicationinsights-core for bare API -->
+			<version>2.5.0</version>
+		</dependency>
+
 		<!-- Log4j -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -496,43 +506,43 @@
 					<path>/petclinic</path>
 				</configuration>
 			</plugin>
-<plugin>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>azure-webapp-maven-plugin</artifactId>
-        <version>1.9.1</version>
-        <configuration>
-          <appName>sandbox-castor-app</appName>
-          <schemaVersion>V2</schemaVersion>
-          <!-- Use Existing Resource Group -->
-          <resourceGroup>furballs-rg</resourceGroup>
-          <!-- Use Existing Service Plan for a B1 Server -->
-          <!-- <pricingTier>B1</pricingTier> -->
-          <!-- <region>eastus</region> -->
-          <appServicePlanName>furballs-sp</appServicePlanName>
-          <appServicePlanResourceGroup>furballs-rg</appServicePlanResourceGroup>     
-          <runtime>
-            <os>linux</os>
-            <javaVersion>jre8</javaVersion>
-            <webContainer>TOMCAT 8.5</webContainer>
-          </runtime>
-          <appSettings>
-            <property>
-              <name>JAVA_OPTS</name>
-              <value>-Dserver.port=80</value>
-            </property>
-          </appSettings>
-          <deployment>
-            <resources>
-              <resource>
-                <directory>${project.basedir}/target</directory>
-                <includes>
-                  <include>*.war</include>
-                </includes>
-              </resource>
-            </resources>
-          </deployment>
-        </configuration>
-      </plugin>			
+			<plugin>
+				<groupId>com.microsoft.azure</groupId>
+				<artifactId>azure-webapp-maven-plugin</artifactId>
+				<version>1.9.1</version>
+				<configuration>
+					<appName>sandbox-castor-app</appName>
+					<schemaVersion>V2</schemaVersion>
+					<!-- Use Existing Resource Group -->
+					<resourceGroup>furballs-rg</resourceGroup>
+					<!-- Use Existing Service Plan for a B1 Server -->
+					<!-- <pricingTier>B1</pricingTier> -->
+					<!-- <region>eastus</region> -->
+					<appServicePlanName>furballs-sp</appServicePlanName>
+					<appServicePlanResourceGroup>furballs-rg</appServicePlanResourceGroup>
+					<runtime>
+						<os>linux</os>
+						<javaVersion>jre8</javaVersion>
+						<webContainer>TOMCAT 8.5</webContainer>
+					</runtime>
+					<appSettings>
+						<property>
+							<name>JAVA_OPTS</name>
+							<value>-Dserver.port=80</value>
+						</property>
+					</appSettings>
+					<deployment>
+						<resources>
+							<resource>
+								<directory>${project.basedir}/target</directory>
+								<includes>
+									<include>*.war</include>
+								</includes>
+							</resource>
+						</resources>
+					</deployment>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
