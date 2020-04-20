@@ -344,15 +344,20 @@
 		</dependency>
 		-->
 
-		<!-- Azure Insights -->
+		<!-- Azure Micrometer -->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-azure-monitor</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<!-- Azure JDK Insights
 		<dependency>
 			<groupId>com.microsoft.azure</groupId>
 			<artifactId>applicationinsights-web-auto</artifactId>
-			<!-- or applicationinsights-web-auto for auto web filter registration -->
-			<!-- or applicationinsights-web for manual web filter registration -->
-			<!-- or applicationinsights-core for bare API -->
 			<version>2.6.0</version>
 		</dependency>
+		-->
 
 		<!-- Log4j -->
 		<dependency>

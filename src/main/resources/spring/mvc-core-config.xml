@@ -66,15 +66,15 @@
     </mvc:interceptors>
     -->
 
-    <!-- Azure Insights -->
+    <!-- Azure Insights 
     <context:component-scan base-package="com.microsoft.applicationinsights.web.spring"/>
-    <bean name="appinsightTelemetryConfiguration" class="com.microsoft.applicationinsights.TelemetryConfiguration" factory-method="getActive">
-    </bean>
+    <bean name="appinsightTelemetryConfiguration" class="com.microsoft.applicationinsights.TelemetryConfiguration" factory-method="getActive"/>
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="com.microsoft.applicationinsights.web.spring.RequestNameHandlerInterceptorAdapter" />
         </mvc:interceptor>
     </mvc:interceptors>
+    -->
 
 </beans>
