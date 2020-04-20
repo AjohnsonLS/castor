@@ -519,12 +519,12 @@
 					<appName>sandbox-castor-app</appName>
 					<schemaVersion>V2</schemaVersion>
 					<!-- Use Existing Resource Group -->
-					<resourceGroup>erebus-rg</resourceGroup>
+					<resourceGroup>castor-rg</resourceGroup>
 					<!-- Use Existing Service Plan for a B1 Server -->
 					<!-- <pricingTier>B1</pricingTier> -->
 					<!-- <region>eastus</region> -->
-					<appServicePlanName>erebus-sp</appServicePlanName>
-					<appServicePlanResourceGroup>erebus-rg</appServicePlanResourceGroup>
+					<appServicePlanName>castor-sp</appServicePlanName>
+					<appServicePlanResourceGroup>castor-rg</appServicePlanResourceGroup>
 					<runtime>
 						<os>linux</os>
 						<javaVersion>jre8</javaVersion>
