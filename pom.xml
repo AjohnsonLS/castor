@@ -291,10 +291,9 @@
                         <webContainer>jre8</webContainer>
                     </runtime>
                     <appSettings>
-                        <!-- Set port for app service-->
                         <property>
-                            <name>PORT</name>
-                            <value>80</value>
+                            <name>JAVA_OPTS</name>
+                            <value>-Dserver.port=80</value>
                         </property>
                     </appSettings>
                     <deployment>
