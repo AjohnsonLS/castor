@@ -170,5 +170,8 @@ see here: http://static.springsource.org/spring/docs/current/spring-framework-re
         <filter-name>ApplicationInsightsWebFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>com.microsoft.applicationinsights.web.internal.ApplicationInsightsServletContextListener</listener-class>
+    </listener>
 
 </web-app>
