@@ -66,4 +66,18 @@
     </mvc:interceptors>
     -->
 
+    <context:component-scan base-package="tutorial, com.microsoft.applicationinsights.web.spring"/>
+    <!-- This factory method causes ApplicationInsights.xml to get loaded -->
+        <bean name="appinsightTelemetryConfiguration"
+                    class="com.microsoft.applicationinsights.TelemetryConfiguration"
+                    factory-method="getActive">
+        </bean>
+        <mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <bean class="com.microsoft.applicationinsights.web.spring.RequestNameHandlerInterceptorAdapter" />
+            </mvc:interceptor>
+        </mvc:interceptors>
+    </context:component-scan>
+
 </beans>
