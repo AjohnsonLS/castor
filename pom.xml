@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.springframework.samples</groupId>
 	<artifactId>spring-petclinic</artifactId>
@@ -16,7 +17,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<!-- Spring -->
-    	<spring-framework.version>4.1.9.RELEASE</spring-framework.version>
+		<spring-framework.version>4.1.9.RELEASE</spring-framework.version>
 		<spring-data-jpa.version>1.11.22.RELEASE</spring-data-jpa.version>
 
 		<!-- Java EE / Java SE dependencies -->
@@ -74,29 +75,29 @@
 			<version>${jadira-usertype-core.version}</version>
 		</dependency>
 		<dependency>
-        	<groupId>org.apache.tomcat</groupId>
-        	<artifactId>tomcat-servlet-api</artifactId>
-         	<version>${tomcat.servlet.version}</version>
-          	<scope>provided</scope>
-        </dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>${tomcat.servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
-                <groupId>javax.servlet.jsp</groupId>
-                <artifactId>jsp-api</artifactId>
-                <version>2.1</version>
-                <scope>provided</scope>
-        </dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <dependency>
-                <groupId>org.glassfish.web</groupId>
-                <artifactId>jstl-impl</artifactId>
-                <version>1.2</version>
-                <exclusions>
-                        <exclusion>
-                                <groupId>javax.servlet</groupId>
-                                <artifactId>servlet-api</artifactId>
-                        </exclusion>
-                </exclusions>
-        </dependency>
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jstl-impl</artifactId>
+			<version>1.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.servlet</groupId>
+					<artifactId>servlet-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
@@ -190,7 +191,7 @@
 			<artifactId>rome</artifactId>
 			<version>${rome.version}</version>
 		</dependency>
-		
+
 		<!-- Date and Time -->
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -230,7 +231,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-ehcache</artifactId>
@@ -263,7 +264,7 @@
 			<artifactId>jquery</artifactId>
 			<version>${webjars-jquery.version}</version>
 		</dependency>
-		
+
 		<!-- Test Artifacts -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -300,10 +301,10 @@
 
 		<!-- Dandelion -->
 		<dependency>
-		    <groupId>com.github.dandelion</groupId>
-		    <artifactId>dandelion-core</artifactId>
-		    <version>1.1.1</version>
-		</dependency>		
+			<groupId>com.github.dandelion</groupId>
+			<artifactId>dandelion-core</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 		<dependency>
 			<groupId>com.github.dandelion</groupId>
 			<artifactId>datatables-jsp</artifactId>
@@ -315,7 +316,7 @@
 			<version>1.1.0</version>
 		</dependency>
 
-		<!-- Prometheus Client -->
+		<!-- Prometheus Client
 		<dependency>
 			<groupId>io.prometheus</groupId>
 			<artifactId>simpleclient</artifactId>
@@ -341,6 +342,7 @@
 			<artifactId>simpleclient_pushgateway</artifactId>
 			<version>0.8.0</version>
 		</dependency>
+		-->
 
 		<!-- Log4j -->
 		<dependency>
@@ -358,7 +360,7 @@
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>2.7</version>
 		</dependency>
-		
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -403,17 +405,17 @@
 
 	<!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
 	<build>
-	    <finalName>ROOT</finalName>
+		<finalName>ROOT</finalName>
 		<defaultGoal>install</defaultGoal>
 		<testResources>
-		  <testResource>
-		  	<!-- declared explicitly so Spring config files can be placed next to their corresponding JUnit test class 
+			<testResource>
+				<!-- declared explicitly so Spring config files can be placed next to their corresponding JUnit test class 
 		  		(see example with ValidatorTests) -->
-		    <directory>${project.basedir}/src/test/java</directory>
-		  </testResource>
-		  <testResource>
-		    <directory>${project.basedir}/src/test/resources</directory>
-		  </testResource>
+				<directory>${project.basedir}/src/test/java</directory>
+			</testResource>
+			<testResource>
+				<directory>${project.basedir}/src/test/resources</directory>
+			</testResource>
 		</testResources>
 		<plugins>
 			<plugin>
@@ -494,6 +496,43 @@
 					<path>/petclinic</path>
 				</configuration>
 			</plugin>
+<plugin>
+        <groupId>com.microsoft.azure</groupId>
+        <artifactId>azure-webapp-maven-plugin</artifactId>
+        <version>1.9.1</version>
+        <configuration>
+          <appName>sandbox-castor-app</appName>
+          <schemaVersion>V2</schemaVersion>
+          <!-- Use Existing Resource Group -->
+          <resourceGroup>furballs-rg</resourceGroup>
+          <!-- Use Existing Service Plan for a B1 Server -->
+          <!-- <pricingTier>B1</pricingTier> -->
+          <!-- <region>eastus</region> -->
+          <appServicePlanName>furballs-sp</appServicePlanName>
+          <appServicePlanResourceGroup>furballs-rg</appServicePlanResourceGroup>     
+          <runtime>
+            <os>linux</os>
+            <javaVersion>jre8</javaVersion>
+            <webContainer>TOMCAT 8.5</webContainer>
+          </runtime>
+          <appSettings>
+            <property>
+              <name>JAVA_OPTS</name>
+              <value>-Dserver.port=80</value>
+            </property>
+          </appSettings>
+          <deployment>
+            <resources>
+              <resource>
+                <directory>${project.basedir}/target</directory>
+                <includes>
+                  <include>*.war</include>
+                </includes>
+              </resource>
+            </resources>
+          </deployment>
+        </configuration>
+      </plugin>			
 		</plugins>
 	</build>
 
