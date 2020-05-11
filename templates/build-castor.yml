@@ -1,0 +1,77 @@
+###############################################################################
+#                                   Template                                  #
+###############################################################################
+apiVersion: v1
+kind: Template
+labels:
+  app: castor
+  template: build-castor
+  application: Furballs
+message: Build Castor
+metadata:
+  name: build-castor
+  annotations:
+    description: Build Castor
+    openshift.io/display-name: Build Castor
+    openshift.io/long-description: Build Castor
+    openshift.io/provider-display-name: ADVLab
+    openshift.io/support-url: https://github.com/advlab/castor
+    tags: advlab
+objects:
+###############################################################################
+#                                Image Stream                                 #
+###############################################################################
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    labels:
+      app: castor
+      application: Furballs
+      monitor: 'true'
+    name: castor
+  spec:
+    lookupPolicy:
+      local: true
+################################################################################
+#                             Build Configuration                              #
+################################################################################
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      app: castor
+      application: Furballs
+      monitor: 'true'
+    name: castor
+  spec:
+    failedBuildsHistoryLimit: 5
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: 'castor:latest'
+    postCommit: {}
+    resources: {}
+    runPolicy: Serial
+    source:
+      git:
+        uri: 'https://github.com/advlab/castor.git'
+      sourceSecret:
+        name: github-perseus
+      type: Git
+    strategy:
+      sourceStrategy:
+        from:
+          kind: ImageStreamTag
+          name: 'wildfly:13.0'
+          namespace: openshift
+      type: Source
+    successfulBuildsHistoryLimit: 5
+################################################################################
+#                            Template Parameters                               #
+################################################################################
+# parameters:
+# - name: POD_NAME
+#   description: Pod Name
+#   displayName: Pod Name
+#   required: true
