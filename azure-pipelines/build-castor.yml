@@ -86,7 +86,7 @@ stages:
             command: 'publish'
             publishDirectory: '$(System.ArtifactsDirectory)'
             feedsToUsePublish: 'internal'
-            vstsFeedPublish: 'castor/artifactory'
+            vstsFeedPublish: 'castor/castor'
             vstsFeedPackagePublish: 'castor'
             versionOption: 'patch'
             packagePublishDescription: 'Latest'
