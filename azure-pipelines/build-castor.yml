@@ -1,0 +1,92 @@
+# Maven package Java project Web App to Linux on Azure
+# Build your Java project and deploy it to Azure as a Linux web app
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+# trigger:
+# - none
+# - master
+
+trigger:
+  branches:
+    include:
+    - build
+
+variables:
+
+  ### Variables ###
+  key1: 'value1'
+  key2: 'value2'
+  key3: 'value3'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+
+  ################################################################################
+  #                             Build WAR File Stage                             #
+  ################################################################################  
+  - stage: Build_Artifact
+    jobs:
+      - job: Build_Artifact
+        steps:
+
+        # Run Maven package to build WAR file
+        - task: Maven@3
+          displayName: 'Maven Package'
+          inputs:
+            mavenPomFile: 'pom.xml'
+            mavenOptions: '-Xmx3072m'
+            javaHomeOption: 'JDKVersion'
+            jdkVersionOption: '1.8'
+            jdkArchitectureOption: 'x64'
+            publishJUnitResults: true
+            testResultsFiles: '**/surefire-reports/TEST-*.xml'
+            goals: 'package'
+            options: '-DskipTests=true'
+
+        # Copy WAR File to Staging Folder
+        - task: CopyFiles@2
+          displayName: 'Stage Files'
+          inputs:
+            SourceFolder: 'target'
+            Contents: '*.war'
+            TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+        # Publish WAR File as Pipeline Build
+        - task: PublishBuildArtifacts@1
+          displayName: 'Publish Build'
+          inputs:
+            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+            ArtifactName: 'drop'
+            publishLocation: 'Container'
+
+  ################################################################################
+  #                     Publish WAR File to Artifacts Stage                      #
+  ################################################################################    
+  - stage: Publish_Artifact
+    jobs:
+      - job: Publish_Artifact
+        steps:
+
+        # Download WAR File from Pipeline Build
+        - task: DownloadBuildArtifacts@0
+          displayName: 'Download Build'
+          inputs:
+            buildType: 'current'
+            downloadType: 'single'
+            artifactName: 'drop'
+            downloadPath: '$(System.ArtifactsDirectory)'
+            
+        # Publish WAR File to Artifacts Repo
+        - task: UniversalPackages@0
+          displayName: 'Publish Artifact'
+          inputs:
+            command: 'publish'
+            publishDirectory: '$(System.ArtifactsDirectory)'
+            feedsToUsePublish: 'internal'
+            vstsFeedPublish: 'castor/artifactory'
+            vstsFeedPackagePublish: 'castor'
+            versionOption: 'patch'
+            packagePublishDescription: 'Latest'
