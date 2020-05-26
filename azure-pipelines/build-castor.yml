@@ -51,7 +51,7 @@ stages:
           displayName: 'Stage Files'
           inputs:
             SourceFolder: 'target'
-            Contents: '*.war'
+            Contents: '*.jar'
             TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
         # Publish WAR File as Pipeline Build
