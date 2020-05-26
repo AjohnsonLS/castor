@@ -73,7 +73,7 @@
                     "hostingstart.html"
                 ],
                 "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "TOMCAT|8.5-jre8",
+                "linuxFxVersion": "JAVA|8-jre8",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": true,
