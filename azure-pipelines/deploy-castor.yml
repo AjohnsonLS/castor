@@ -81,7 +81,7 @@ stages:
     jobs:
       - job: Download_Package
         steps:
-        # Download latest WAR file package from Artifact Feed
+        # Download latest JAR file package from Artifact Feed
         - task: DownloadPackage@1
           inputs:
             packageType: 'upack'
@@ -91,11 +91,11 @@ stages:
             version: '0.0.*'
             downloadPath: '$(System.ArtifactsDirectory)'
 
-        # Deploy WAR file to Azure Application Service
+        # Deploy JAR file to Azure Application Service
         - task: AzureRmWebAppDeployment@4
           inputs:
             ConnectionType: 'AzureRM'
             azureSubscription: 'stage(39fa8f87-83f2-4d92-a424-408ebdfbeb19)'
             appType: 'webAppLinux'
             WebAppName: '$(webAppName)'
-            packageForLinux: '$(System.ArtifactsDirectory)/drop/*.war'
+            packageForLinux: '$(System.ArtifactsDirectory)/drop/*.jar'
