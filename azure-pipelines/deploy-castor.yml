@@ -1,0 +1,101 @@
+# Maven package Java project Web App to Linux on Azure
+# Build your Java project and deploy it to Azure as a Linux web app
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+# trigger: 
+# - none
+# - master
+
+trigger:
+  branches:
+    include:
+    - deploy
+
+variables:
+
+  ### Variables ###
+  accountName: 'stage'
+  applicationName: 'castor'
+  resourceGroupName: '$(applicationName)-rg'
+  appServicePlanName: '$(applicationName)-sp'
+  prefix: '$(accountName)-$(applicationName)'
+  webAppName: '$(prefix)-app'
+  location: 'East US'
+  skuName: 'B1'
+  skuCapacity: 1
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+
+  ################################################################################
+  #                         Initialize Azure Stage                               #
+  ################################################################################
+  - stage: Init_Env
+    jobs:
+      - job: Create_Service_Plan
+        steps:
+        # Use ARM Template to create Azure Service Plan
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: 'stage(39fa8f87-83f2-4d92-a424-408ebdfbeb19)'
+            subscriptionId: '39fa8f87-83f2-4d92-a424-408ebdfbeb19'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(resourceGroupName)'
+            location: '$(location)'
+            templateLocation: 'Linked artifact'
+            csmFile: 'azure-arm/castor-sp.json'
+            csmParametersFile: 'azure-arm/castor-sp.parameters.json'
+            overrideParameters: '-appServicePlanName $(appServicePlanName) -skuName $(skuName) -skuCapacity $(skuCapacity)'
+            deploymentMode: 'Incremental'
+
+  ################################################################################
+  #                         Create App Service Stage                             #
+  ################################################################################  
+  - stage: Create_App_Service
+    jobs:
+      - job: Create_App_Service
+        steps:
+        # Use ARM Template to create Azure Application Service
+        - task: AzureResourceManagerTemplateDeployment@3
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: 'stage(39fa8f87-83f2-4d92-a424-408ebdfbeb19)'
+            subscriptionId: '39fa8f87-83f2-4d92-a424-408ebdfbeb19'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(resourceGroupName)'
+            location: '$(location)'
+            templateLocation: 'Linked artifact'
+            csmFile: 'azure-arm/castor-app.json'
+            csmParametersFile: 'azure-arm/castor-app.parameters.json'
+            overrideParameters: '-webAppName $(webAppName) -appServicePlanName $(appServicePlanName)'
+            deploymentMode: 'Incremental'
+
+  ################################################################################
+  #                            Deploy Artifact Stage                             #
+  ################################################################################  
+  - stage: Deploy_Artifact
+    jobs:
+      - job: Download_Package
+        steps:
+        # Download latest WAR file package from Artifact Feed
+        - task: DownloadPackage@1
+          inputs:
+            packageType: 'upack'
+            feed: 'b41ddbcb-289a-4302-8437-38127314a0e0/82bc6ac9-1930-4856-9cdb-5510cd99512d'
+            view: '5532f264-1511-4a39-9111-7cc81aa3f121'
+            definition: '7fbc9209-cafc-468d-89f4-51a34ef787e5'
+            version: '0.0.*'
+            downloadPath: '$(System.ArtifactsDirectory)'
+
+        # Deploy WAR file to Azure Application Service
+        - task: AzureRmWebAppDeployment@4
+          inputs:
+            ConnectionType: 'AzureRM'
+            azureSubscription: 'stage(39fa8f87-83f2-4d92-a424-408ebdfbeb19)'
+            appType: 'webAppLinux'
+            WebAppName: '$(webAppName)'
+            packageForLinux: '$(System.ArtifactsDirectory)/drop/*.war'
