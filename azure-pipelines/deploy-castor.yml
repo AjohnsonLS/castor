@@ -85,9 +85,9 @@ stages:
         - task: DownloadPackage@1
           inputs:
             packageType: 'upack'
-            feed: 'b41ddbcb-289a-4302-8437-38127314a0e0/82bc6ac9-1930-4856-9cdb-5510cd99512d'
-            view: '5532f264-1511-4a39-9111-7cc81aa3f121'
-            definition: '7fbc9209-cafc-468d-89f4-51a34ef787e5'
+            feed: '3440706d-f58a-48bc-8ada-422c0cf81703/2bd1b001-e228-4900-a84b-e5729ab320ae'
+            view: 'd7297a1d-59e8-468d-8c80-a9ed3be6fb7f'
+            definition: '2e7594a2-26fe-40cd-af59-8886e59bd9ba'
             version: '0.0.*'
             downloadPath: '$(System.ArtifactsDirectory)'
 
