@@ -121,6 +121,20 @@
                 "ftpsState": "AllAllowed",
                 "reservedInstanceCount": 0
             }
+        },
+        {
+            "name": "[concat(parameters('webAppName'), '-appsettings')]",
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+            ],
+            "tags": {
+                "displayName": "WebAppSettings"
+            },
+            "properties": {
+                "JAVA_OPTS": "-Dserver.port=80"
+            }
         }
     ]
 }
