@@ -79,6 +79,7 @@
                 "httpLoggingEnabled": true,
                 "logsDirectorySizeLimit": 100,
                 "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$sandbox-castor-app",
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
