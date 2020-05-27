@@ -119,7 +119,8 @@
                 "http20Enabled": false,
                 "minTlsVersion": "1.2",
                 "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
+                "reservedInstanceCount": 0,
+                "JAVA_OPTS":"-Dserver.port=80"
             }
         }
     ]
