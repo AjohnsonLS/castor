@@ -37,14 +37,7 @@
                 "reserved": true,
                 "isXenon": false,
                 "hyperV": false,
-                "siteConfig": {
-                    "appSettings": [
-                        {
-                            "name": "JAVA_OPTS",
-                            "value": "-Dserver.port=80"
-                        }
-                    ]
-                },
+                "siteConfig": {},
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": true,
                 "clientCertEnabled": false,
@@ -126,7 +119,15 @@
                 "http20Enabled": false,
                 "minTlsVersion": "1.2",
                 "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
+                "reservedInstanceCount": 0,
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "JAVA_OPTS",
+                            "value": "-Dserver.port=80"
+                        }
+                    ]
+                }
             }
         }
     ]
