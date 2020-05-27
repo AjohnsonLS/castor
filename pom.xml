@@ -7,7 +7,7 @@
   <version>2.2.0.BUILD-SNAPSHOT</version>
   <name>petclinic</name>
   <description>Pet Clinic</description>
-  <!-- <packaging>war</packaging> -->
+  <packaging>jar</packaging>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -130,7 +130,7 @@
     </dependency>
   </dependencies>
   <build>
-    <!-- <finalName>ROOT</finalName> -->
+    <finalName>app</finalName>
     <plugins>
       <plugin>
         <groupId>io.spring.javaformat</groupId>
