@@ -277,7 +277,7 @@
         <artifactId>azure-webapp-maven-plugin</artifactId>
         <version>1.9.1</version>
         <configuration>
-          <appName>sandbox-castor-app</appName>
+          <appName>stage-castor-app</appName>
           <schemaVersion>V2</schemaVersion>
           <!-- Use Existing Resource Group -->
           <resourceGroup>castor-rg</resourceGroup>
