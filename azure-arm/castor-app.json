@@ -119,21 +119,14 @@
                 "http20Enabled": false,
                 "minTlsVersion": "1.2",
                 "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
-            }
-        },
-        {
-            "name": "[concat(parameters('webAppName'), '-appsettings')]",
-            "type": "Microsoft.Web/sites/config",
-            "apiVersion": "2018-11-01",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
-            ],
-            "tags": {
-                "displayName": "WebAppSettings"
-            },
-            "properties": {
-                "JAVA_OPTS": "-Dserver.port=80"
+                "reservedInstanceCount": 0,
+                "appSettings": [
+                    {
+                        "name": "JAVA_OPTS",
+                        "value": "-Dserver.port=80",
+                        "slotSetting": false
+                    }
+                ]
             }
         }
     ]
