@@ -9,12 +9,32 @@
             "type": "string"
         }
     },
+    "variables": {
+        "appInsightsName": "[concat(parameters('webAppName'),'-insights')]"
+    },
     "resources": [
+        {
+            "type": "Microsoft.Insights/components",
+            "apiVersion": "2015-05-01",
+            "name": "[variables('appInsightsName')]",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "service": "furball"
+            },
+            "kind": "web",
+            "properties": {
+                "Application_Type": "web",
+                "applicationId": "[variables('appInsightsName')]"
+            }
+        },
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
             "name": "[parameters('webAppName')]",
             "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/components', variables('appInsightsName'))]"
+            ],
             "tags": {
                 "service": "furball"
             },
@@ -42,6 +62,10 @@
                         {
                             "name": "JAVA_OPTS",
                             "value": "-Dserver.port=80"
+                        },
+                        {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(concat('microsoft.insights/components/', variables('appInsightsName'))).InstrumentationKey]"
                         }
                     ]
                 },
@@ -128,6 +152,99 @@
                 "ftpsState": "AllAllowed",
                 "reservedInstanceCount": 0
             }
-        }
+        },
+{
+            "name": "Castor",
+            "type": "Microsoft.Insights/actionGroups",
+            "apiVersion": "2019-03-01",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+            ],
+            "tags": {
+                "service": "furball"
+            },
+            "properties": {
+                "groupShortName": "Castor",
+                "enabled": true,
+                "emailReceivers": [
+                    {
+                        "name": "E-Mail",
+                        "emailAddress": "aangelo@maildrop.cc",
+                        "useCommonAlertSchema": false
+                    }
+                ],
+                "smsReceivers": [],
+                // "smsReceivers": [
+                //   {
+                //     "name": "SMS",
+                //     "countryCode": "1",
+                //     "phoneNumber": "2023905399"
+                //   }
+                // ],
+                "webhookReceivers": [
+                  {
+                    "identifierUri": null,
+                    "name": "orlandodemo04",
+                    "objectId": null,
+                    "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure",
+                    "tenantId": null,
+                    "useAadAuth": false,
+                    "useCommonAlertSchema": false
+                  }
+                ],
+                "itsmReceivers": [],
+                "azureAppPushReceivers": [],
+                "automationRunbookReceivers": [],
+                "voiceReceivers": [],
+                "logicAppReceivers": [],
+                "azureFunctionReceivers": [],
+                "armRoleReceivers": []
+            }
+        },
+        {
+            "name": "Castor",
+            "type": "Microsoft.Insights/metricAlerts",
+            "location": "Global",
+            "apiVersion": "2018-03-01",
+            "dependsOn": [
+                "[resourceId('Microsoft.Insights/actionGroups', 'Castor')]"
+            ],
+            "tags": {
+                "service": "furball"
+            },
+            "properties": {
+                "description": "Castor",
+                "severity": 0,
+                "enabled": true,
+                "scopes": [
+                    "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+                ],
+                "evaluationFrequency": "PT1M",
+                "windowSize": "PT1M",
+                "criteria": {
+                    "odata.type": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+                    "allOf": [
+                        {
+                            "criterionType": "StaticThresholdCriterion",
+                            "dimensions": [],
+                            "metricName": "HttpResponseTime",
+                            "metricNamespace": "Microsoft.Web/sites",
+                            "monitorTemplateType": 8,
+                            "name": "Metric1",
+                            "operator": "GreaterThan",
+                            "threshold": 0.01,
+                            "timeAggregation": "Maximum"
+                        }
+                    ]
+                },
+                "actions": [
+                    {
+                        "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', 'Castor')]",
+                        "webHookProperties": {}
+                    }
+                ]
+            }
+        }        
     ]
 }
