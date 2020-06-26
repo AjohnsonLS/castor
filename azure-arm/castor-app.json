@@ -154,7 +154,7 @@
             }
         },
 {
-            "name": "Castor",
+            "name": "CastorAG1",
             "type": "Microsoft.Insights/actionGroups",
             "apiVersion": "2019-03-01",
             "location": "Global",
@@ -165,7 +165,7 @@
                 "service": "furball"
             },
             "properties": {
-                "groupShortName": "Castor",
+                "groupShortName": "CastorAG1",
                 "enabled": true,
                 "emailReceivers": [
                     {
@@ -187,11 +187,20 @@
                     "identifierUri": null,
                     "name": "orlandodemo04",
                     "objectId": null,
-                    "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure",
+                    "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure_webhook?service=675721dadb155010230790c7db961908",
                     "tenantId": null,
                     "useAadAuth": false,
                     "useCommonAlertSchema": false
-                  }
+                  },
+                  {
+                    "identifierUri": null,
+                    "name": "pagerduty",
+                    "objectId": null,
+                    "serviceUri": "https://events.pagerduty.com/integration/c080d4fce4cf4da9b48854b6873bfe09/enqueue",
+                    "tenantId": null,
+                    "useAadAuth": false,
+                    "useCommonAlertSchema": false
+                  }                  
                 ],
                 "itsmReceivers": [],
                 "azureAppPushReceivers": [],
@@ -203,18 +212,18 @@
             }
         },
         {
-            "name": "Castor",
+            "name": "CastorAL1",
             "type": "Microsoft.Insights/metricAlerts",
             "location": "Global",
             "apiVersion": "2018-03-01",
             "dependsOn": [
-                "[resourceId('Microsoft.Insights/actionGroups', 'Castor')]"
+                "[resourceId('Microsoft.Insights/actionGroups', 'CastorAG1')]"
             ],
             "tags": {
                 "service": "furball"
             },
             "properties": {
-                "description": "Castor",
+                "description": "CastorAL1",
                 "severity": 0,
                 "enabled": true,
                 "scopes": [
