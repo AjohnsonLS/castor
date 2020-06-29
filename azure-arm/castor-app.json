@@ -199,7 +199,7 @@
                     "serviceUri": "https://events.pagerduty.com/integration/c080d4fce4cf4da9b48854b6873bfe09/enqueue",
                     "tenantId": null,
                     "useAadAuth": false,
-                    "useCommonAlertSchema": true
+                    "useCommonAlertSchema": false
                   }                  
                 ],
                 "itsmReceivers": [],
