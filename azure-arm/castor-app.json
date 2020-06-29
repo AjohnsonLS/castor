@@ -187,10 +187,10 @@
                     "identifierUri": null,
                     "name": "orlandodemo04",
                     "objectId": null,
-                    "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure_webhook?service=675721dadb155010230790c7db961908",
+                    "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure",
                     "tenantId": null,
                     "useAadAuth": false,
-                    "useCommonAlertSchema": false
+                    "useCommonAlertSchema": true
                   },
                   {
                     "identifierUri": null,
@@ -199,7 +199,7 @@
                     "serviceUri": "https://events.pagerduty.com/integration/c080d4fce4cf4da9b48854b6873bfe09/enqueue",
                     "tenantId": null,
                     "useAadAuth": false,
-                    "useCommonAlertSchema": false
+                    "useCommonAlertSchema": true
                   }                  
                 ],
                 "itsmReceivers": [],
@@ -249,7 +249,7 @@
                 },
                 "actions": [
                     {
-                        "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', 'Castor')]",
+                        "actionGroupId": "[resourceId('Microsoft.Insights/actionGroups', 'CastorAG1')]",
                         "webHookProperties": {}
                     }
                 ]
