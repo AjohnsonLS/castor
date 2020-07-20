@@ -190,7 +190,7 @@
                     "serviceUri": "https://orlandodemo04.service-now.com/api/global/em/inbound_event_azure",
                     "tenantId": null,
                     "useAadAuth": false,
-                    "useCommonAlertSchema": true
+                    "useCommonAlertSchema": false
                   },
                   {
                     "identifierUri": null,
