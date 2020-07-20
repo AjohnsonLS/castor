@@ -203,7 +203,7 @@
                   },
                   {
                     "identifierUri": null,
-                    "name": "modops-1",
+                    "name": "stage-1",
                     "objectId": null,
                     "serviceUri": "https://snsfwpoc.service-now.com/api/sn_itx_sfw_core/service_integrations/event_sink/48af9ed6db7d5c1062dff1471d96196e",
                     "tenantId": null,
