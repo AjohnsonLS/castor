@@ -24,6 +24,11 @@ This is the [Spring PetClinic Sample Application](https://github.com/spring-proj
 	git clone git@github.com:advlab/castor.git
 	cd castor
 	```
+1. Build War file
+
+    ```
+    mvn clean install -Dmaven.test.skip=true
+    ```
 
 1. Run Project locally
 
