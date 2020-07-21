@@ -18,13 +18,7 @@ This is the [Spring PetClinic Sample Application](https://github.com/spring-proj
 
 # Deploy Locally
 
-1. Clone Project
-
-	```
-	git clone git@github.com:advlab/castor.git
-	cd castor
-	```
-1. Build War file
+1. Build Artifact
 
     ```
     mvn clean install -Dmaven.test.skip=true
