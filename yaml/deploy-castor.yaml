@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: castor
   labels:
-    app: erebus
+    app: castor
     monitor: 'true'
 spec:
   replicas: 1
