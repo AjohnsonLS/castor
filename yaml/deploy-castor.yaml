@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: castor
+  labels:
+    app: erebus
+    monitor: 'true'
 spec:
   replicas: 1
   selector:
@@ -11,6 +14,7 @@ spec:
     metadata:
       labels:
         app: castor
+        monitor: 'true'
     spec:
       containers:
       - name: castor
@@ -22,6 +26,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: castor
+  labels:
+    app: erebus
+    monitor: 'true'
 spec:
   type: LoadBalancer
   ports:
