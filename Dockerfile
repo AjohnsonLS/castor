@@ -15,15 +15,20 @@ LABEL org.opencontainers.image.title="Castor" \
       org.opencontainers.image.vendor="Anthony Angelo" \
       org.opencontainers.image.licenses="MIT" \
       org.opencontainers.image.source="https://github.com/pangealab/castor.git" \
-      org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION 
+      org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION
+
+# Install Tools
+RUN apk add --update curl && \
+    rm -rf /var/cache/apk/*
 
 # Declare Ports
 EXPOSE 8080
+
+# Copy Java OTEL Launcher
+RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/download/lightstep-opentelemetry-javaagent.jar 
 
 # Copy App
 ADD target/app.jar app.jar
 
 # Run Spring Boot
-ENTRYPOINT ["java","-jar","/app.jar"]
-
-# CMD ["catalina.sh", "run"]
+CMD [ "run.sh" ]
