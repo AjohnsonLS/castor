@@ -27,8 +27,9 @@ EXPOSE 8080
 # Copy Java OTEL Launcher
 RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/download/lightstep-opentelemetry-javaagent.jar 
 
-# Copy App
+# Copy App Files
 ADD target/app.jar app.jar
+ADD run.sh run.sh
 
 # Run Spring Boot
 CMD [ "run.sh" ]
