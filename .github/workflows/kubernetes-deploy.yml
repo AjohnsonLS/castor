@@ -41,10 +41,18 @@ jobs:
         role-duration-seconds: 900
         role-session-name: github
 
-    # Deploy to Kubernetes
+    # Deploy Secrets to Kubernetes
     - name: Deploy to Kubernetes
       uses: pangealab/kratos@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: apply -f yaml/deploy-castor.yaml -n sandbox
+        args: kubectl -n sandbox create secret generic lightstep --from-literal=token=${{ secrets.LIGHTSTEP_ACCESS_TOKEN }}   
+        
+    # Deploy App to Kubernetes
+    - name: Deploy to Kubernetes
+      uses: pangealab/kratos@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: apply -n sandbox -f yaml/deploy-castor.yaml
