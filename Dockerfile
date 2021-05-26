@@ -32,4 +32,4 @@ ADD target/app.jar app.jar
 COPY run.sh run.sh
 
 # Run Spring Boot
-CMD [ "./run.sh" ]
+ENTRYPOINT ["./start.sh"]
