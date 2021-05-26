@@ -29,7 +29,13 @@ RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/
 
 # Copy App Files
 ADD target/app.jar app.jar
-ADD start.sh start.sh
+
+# Lightstep
+ENV LS_ACCESS_TOKEN=YJ/7/UUODD6b93YoauvRy+vKY6/sqvsN9UR/ZL1d++W3Eyg3KfCUpgktAymsj3huDkQgIJwLBrSgQzJaUJJuVx6iE8oen+5UqnNjZcay
+ENV LS_SERVICE_NAME=castor
+ENV LS_SERVICE_VERSION=latest
 
 # Run Spring Boot
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["java","-javaagent:lightstep-opentelemetry-javaagent.jar","-Xshare:off","-jar","/app.jar"]
+
+# CMD ["catalina.sh", "run"]
