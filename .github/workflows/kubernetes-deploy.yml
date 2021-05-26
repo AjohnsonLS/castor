@@ -47,7 +47,7 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: kubectl -n sandbox create secret generic lightstep --from-literal=token=${{ secrets.LIGHTSTEP_ACCESS_TOKEN }}   
+        args: kubectl create secret generic lightstep --from-literal=token=${{ secrets.LIGHTSTEP_ACCESS_TOKEN }} -n sandbox
         
     # Deploy App to Kubernetes
     - name: Deploy to Kubernetes
