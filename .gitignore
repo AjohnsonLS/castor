@@ -5,6 +5,7 @@ target/*
 .factorypath
 .attach_pid*
 .idea
+.subst
 *.iml
 /target
 .sts4-cache/

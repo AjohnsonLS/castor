@@ -23,7 +23,7 @@ spec:
         - containerPort: 8080
         env:
           - name: LS_ACCESS_TOKEN
-            value: $LS_ACCESS_TOKEN
+            value: YJ/7/UUODD6b93YoauvRy+vKY6/sqvsN9UR/ZL1d++W3Eyg3KfCUpgktAymsj3huDkQgIJwLBrSgQzJaUJJuVx6iE8oen+5UqnNjZcay
           - name: LS_SERVICE_NAME
             value: castor
           - name: LS_SERVICE_VERSION
