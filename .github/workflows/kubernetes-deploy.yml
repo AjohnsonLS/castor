@@ -54,4 +54,4 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: apply -n sandbox -f yaml/deploy-castor.yaml
+        args: apply -n sandbox -f yaml/deploy-castor.yaml.subst
