@@ -29,7 +29,7 @@ RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/
 
 # Copy App Files
 ADD target/app.jar app.jar
-ADD run.sh run.sh
+COPY run.sh run.sh
 
 # Run Spring Boot
-CMD [ "run.sh" ]
+CMD [ "./run.sh" ]
