@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jre
 
 ARG IMAGE_CREATE_DATE
 ARG IMAGE_VERSION
@@ -17,23 +17,19 @@ LABEL org.opencontainers.image.title="Castor" \
       org.opencontainers.image.source="https://github.com/pangealab/castor.git" \
       org.opencontainers.image.revision=$IMAGE_SOURCE_REVISION
 
-# Install Tools
-RUN apk add --update curl && \
-    rm -rf /var/cache/apk/*
-
 # Declare Ports
 EXPOSE 8080
 
-# Copy Java OTEL Launcher
+# Download Java OTEL Launcher
 RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/download/lightstep-opentelemetry-javaagent.jar 
 
 # Copy App Files
 ADD target/app.jar app.jar
 
-# Lightstep
-ENV LS_ACCESS_TOKEN=YJ/7/UUODD6b93YoauvRy+vKY6/sqvsN9UR/ZL1d++W3Eyg3KfCUpgktAymsj3huDkQgIJwLBrSgQzJaUJJuVx6iE8oen+5UqnNjZcay
-ENV LS_SERVICE_NAME=castor
-ENV LS_SERVICE_VERSION=latest
+# Lightstep Settings
+# ENV LS_ACCESS_TOKEN=<<YOUR TOKEN>>
+# ENV LS_SERVICE_NAME=<<YOUR SERVICE>>
+# ENV LS_SERVICE_VERSION=<<YOUR VERSION>>
 
 # Run Spring Boot
 ENTRYPOINT ["java","-javaagent:lightstep-opentelemetry-javaagent.jar","-Xshare:off","-jar","/app.jar"]
