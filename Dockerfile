@@ -29,7 +29,7 @@ RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/
 
 # Copy App Files
 ADD target/app.jar app.jar
-COPY run.sh run.sh
+COPY start.sh start.sh
 
 # Run Spring Boot
 ENTRYPOINT ["./start.sh"]
