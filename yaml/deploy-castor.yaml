@@ -23,11 +23,7 @@ spec:
         - containerPort: 8080
         env:
           - name: LS_ACCESS_TOKEN
-<<<<<<< HEAD
-            value: "${{ secrets.LIGHTSTEP_ACCESS_TOKEN }}"
-=======
             value: $LS_ACCESS_TOKEN
->>>>>>> 697c3c13c078afcf30e2f85566e7e6a297ce881a
           - name: LS_SERVICE_NAME
             value: castor
           - name: LS_SERVICE_VERSION
