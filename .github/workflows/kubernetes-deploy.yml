@@ -40,11 +40,18 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-duration-seconds: 900
         role-session-name: github
-
+        
+    # Substitute Variables
+    - name: Substitute Variables
+      env:
+        LS_ACCESS_TOKEN: ${{ secrets.LIGHTSTEP_ACCESS_TOKEN }}
+      run: | 
+        envsubst < yaml/deploy-castor.yaml > yaml/deploy-castor.yaml.subst
+      
     # Deploy to Kubernetes
     - name: Deploy to Kubernetes
       uses: pangealab/kratos@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       with:
-        args: apply -f yaml/deploy-castor.yaml -n sandbox
+        args: apply -n sandbox -f yaml/deploy-castor.yaml.subst
