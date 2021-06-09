@@ -20,7 +20,7 @@ LABEL org.opencontainers.image.title="Castor" \
 # Declare Ports
 EXPOSE 8080
 
-# Download Java OTEL Launcher
+# LighStep Instrumentation
 RUN curl -L -O  https://github.com/lightstep/otel-launcher-java/releases/latest/download/lightstep-opentelemetry-javaagent.jar 
 
 # Copy App Files
