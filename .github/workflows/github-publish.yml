@@ -36,3 +36,9 @@ jobs:
       run: mvn -B package --file pom.xml -Dmaven.test.skip=true -Ddatadog.api-key=${{ secrets.DATADOG_API_KEY }}
   
     # Publish the .war file to GitHub
+    - name: Upload to GitHub
+      uses: actions/upload-artifact@v2.2.4
+      with: 
+        name: artifact
+        retention-days: 0
+        path: target/app.jar
